@@ -1,4 +1,4 @@
-import { regProduct, showAllProducts, updateProduct } from "../repositories/productRepository.js"
+import { deleteProduct, regProduct, showAllProducts, updateProduct } from "../repositories/productRepository.js"
 
 class productController{
     
@@ -59,6 +59,19 @@ class productController{
         }
         
         
+    }
+
+    async deleteProduct(req, res){
+        try {
+            const {id} = req.params
+
+            const newDelete = await deleteProduct(id)
+                
+                return res.status(200).json({ message: "Product successfully deleted", newDelete})
+        } catch (err){
+            console.error(err)
+            return res.status(500).json({error: "Error deleting product: ", err})
+        }
     }
 }
 

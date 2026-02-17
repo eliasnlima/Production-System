@@ -18,8 +18,8 @@ export async function showAllProducts() {
         return res.rows;
 
     } catch (err) {
-        console.error(err);
-        throw err;
+        console.error(err)
+        throw err
     }
 }
 
@@ -28,10 +28,22 @@ export async function updateProduct(id, product) {
 
         const res = await pool.query(`UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *`, [product.name, product.price, id])
 
-        return res.rows[0];
+        return res.rows[0]
 
     } catch (err) {
-        console.error(err);
-        throw err;
+        console.error(err)
+        throw err
     }
+}
+
+export async function deleteProduct(id) {
+    try {
+        const res = await pool.query(`DELETE FROM products WHERE id=$1`, [id])
+
+        return res.rowCount
+    } catch(err){
+        console.error(err)
+        throw err
+    }
+    
 }
