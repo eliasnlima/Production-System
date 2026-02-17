@@ -22,3 +22,16 @@ export async function showAllProducts() {
         throw err;
     }
 }
+
+export async function updateProduct(id, product) {
+    try {
+
+        const res = await pool.query(`UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *`, [product.name, product.price, id])
+
+        return res.rows[0];
+
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
