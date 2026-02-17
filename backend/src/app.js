@@ -1,4 +1,8 @@
 import express from 'express'
+import dotenv from 'dotenv'
+import pool from './database/connection.js'
+
+dotenv.config()
 
 class App{
     constructor(){
