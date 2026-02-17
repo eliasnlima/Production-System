@@ -1,4 +1,4 @@
-import { regProduct } from "../repositories/productRepository.js"
+import { regProduct, showAllProducts } from "../repositories/productRepository.js"
 
 class productController{
     
@@ -21,7 +21,21 @@ class productController{
 
             return res.status(500).json({error: "Error registering product!"})
         }
-        
+    }
+
+    async showAllProducts(req, res){
+        try{    
+            
+            const products = await showAllProducts()
+
+            return res.status(200).json({products})
+
+        } catch (error){
+
+            console.error(error)
+
+            return res.status(500).json({error: "Error fetching products:", err})
+        }
     }
 }
 

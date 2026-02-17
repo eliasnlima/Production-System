@@ -8,6 +8,17 @@ export async function regProduct(product) {
     } catch (err){
         console.error(err)
         throw err
+    }    
+}
+
+export async function showAllProducts() {
+    try {
+        const res = await pool.query(`SELECT * FROM products ORDER BY price DESC`);
+
+        return res.rows;
+
+    } catch (err) {
+        console.error(err);
+        throw err;
     }
-    
 }
