@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import pool from './database/connection.js'
+import productRoutes from './routes/productRoutes.js'
 
 dotenv.config()
 
@@ -17,9 +17,7 @@ class App{
     }
 
     routes(){
-        this.server.get('/', (req, res) => {
-            res.json({server: "ok"})
-        })
+        this.server.use(productRoutes)
     }
 }
 
