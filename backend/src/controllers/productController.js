@@ -6,6 +6,10 @@ class productController{
         try{
             const { name, price } = req.body
 
+            if (!name || !price){
+                return res.status(400).json({ error: "Name and Price need to be filled in!"})
+            }
+
             const product = {
                 name,
                 price
