@@ -1,8 +1,8 @@
 import pool from "../database/connection.js";
 
-export async function regProduct(product) {
+export async function regProduction(production) {
     try {
-        const res = await pool.query(`INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *`, [product.name, product.price] )
+        const res = await pool.query(`INSERT INTO production (product_id, raw_material_id, quantity) VALUES ($1, $2, $3) RETURNING *`, [production.product_id, production.raw_material_id, production.quantity] )
 
         return res.rows[0]
     } catch (err){
@@ -41,18 +41,6 @@ export async function deleteProduct(id) {
         const res = await pool.query(`DELETE FROM products WHERE id=$1`, [id])
 
         return res.rowCount
-    } catch(err){
-        console.error(err)
-        throw err
-    }
-    
-}
-
-export async function productSearchById(id) {
-    try{
-        const res = await pool.query(`SELECT * FROM products WHERE id = $1`, [id])
-
-        return res.rows[0]
     } catch(err){
         console.error(err)
         throw err

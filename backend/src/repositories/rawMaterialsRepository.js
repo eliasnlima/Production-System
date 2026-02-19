@@ -47,3 +47,15 @@ export async function deleteMaterial(id) {
     }
     
 }
+
+export async function materialSearchById(id) {
+    try{
+        const res = await pool.query(`SELECT * FROM raw_materials WHERE id = $1`, [id])
+
+        return res.rows[0]
+    } catch(err){
+        console.error(err)
+        throw err
+    }
+    
+}

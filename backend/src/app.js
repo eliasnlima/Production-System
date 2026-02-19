@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import productRoutes from './routes/productRoutes.js'
 import rawMaterialsRoutes from './routes/rawMaterialsRoutes.js'
+import productionRoutes from './routes/productionRoutes.js'
 
 
 dotenv.config()
@@ -21,6 +22,7 @@ class App{
     routes(){
         this.server.use(productRoutes)
         this.server.use(rawMaterialsRoutes)
+        this.server.use(productionRoutes)
     }
 }
 
