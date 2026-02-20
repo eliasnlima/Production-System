@@ -47,3 +47,19 @@ export async function deleteProduct(id) {
     }
     
 }
+
+export async function getProduction() {
+    try {
+        const res = await pool.query(`
+            SELECT p.id, p.name, p.price, rm.name as name_material, rm.stock_quantity, pr.quantity
+            FROM products as p 
+            join production as pr ON p.id = pr.product_id
+            join raw_materials as rm on pr.raw_material_id = rm.id
+            order by p.price DESC`)
+
+        return res.rows
+    } catch (err){
+        console.error(err)
+        throw err
+    }    
+}

@@ -1,4 +1,4 @@
-import { createProduction } from "../services/productionServices.js"
+import { createProduction, getNewProduction } from "../services/productionServices.js"
 
 class productionController{
     
@@ -17,6 +17,17 @@ class productionController{
         }
     }
 
+    async canProduce(req,res){
+        try{
+            const produce = await getNewProduction()
+
+            return res.json({produce})
+        }catch (err){
+            console.error(err)
+
+            return res.status(500).json(err)
+        }
+    }
 }
 
 export default new productionController()
