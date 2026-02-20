@@ -11,22 +11,10 @@ export async function regProduction(production) {
     }    
 }
 
-export async function showAllProducts() {
-    try {
-        const res = await pool.query(`SELECT * FROM products ORDER BY price DESC`);
-
-        return res.rows;
-
-    } catch (err) {
-        console.error(err)
-        throw err
-    }
-}
-
-export async function updateProduct(id, product) {
+export async function updateProduction(id, production) {
     try {
 
-        const res = await pool.query(`UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *`, [product.name, product.price, id])
+        const res = await pool.query(`UPDATE production SET product_id = $1, raw_material_id = $2, quantity = $3 WHERE id = $4`, [production.product_id, production.raw_material_id, production.quantity, id])
 
         return res.rows[0]
 
@@ -36,9 +24,9 @@ export async function updateProduct(id, product) {
     }
 }
 
-export async function deleteProduct(id) {
+export async function deleteProduction(id) {
     try {
-        const res = await pool.query(`DELETE FROM products WHERE id=$1`, [id])
+        const res = await pool.query(`DELETE FROM production WHERE id=$1`, [id])
 
         return res.rowCount
     } catch(err){

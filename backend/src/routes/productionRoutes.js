@@ -5,6 +5,8 @@ const productionRoutes = Router()
 
 productionRoutes.post('/productions', productionController.regProduction)
 productionRoutes.get('/productions', productionController.canProduce)
+productionRoutes.put('/production/:id', productionController.updateProduction)
+productionRoutes.delete('/production/:id', productionController.deleteProduction)
 
 
 
