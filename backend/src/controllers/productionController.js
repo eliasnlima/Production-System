@@ -1,4 +1,4 @@
-import { deleteProduction, updateProduction } from "../repositories/productionRepository.js"
+import { deleteProduction, showProduction, updateProduction } from "../repositories/productionRepository.js"
 import { createProduction, getNewProduction } from "../services/productionServices.js"
 
 class productionController{
@@ -66,6 +66,19 @@ class productionController{
                     return res.status(500).json({error: "Error deleting production: ", err})
                 }
             }
+
+            async showAllProductions(req, res){
+                try {
+                    const productions = await showProduction()
+                        
+                        return res.json({productions})
+                } catch (err){
+                    console.error(err)
+                    return res.status(500).json({error: "Error show productions: ", err})
+                }
+            }
+
+
     
 }
 

@@ -1,0 +1,181 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f4f6f8;
+
+    color: #333;
+}
+
+.container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 20px;
+}
+
+h1 {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: #2c3e50;
+}
+
+h2 {
+
+    margin-bottom: 15px;
+
+    color: #34495e;
+}
+
+.card {
+
+    background: white;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+button {
+
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: #3498db;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button:hover {
+
+    background-color: #2980b9;
+}
+
+.list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.list-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    background: #f8f9fa;
+
+    border: 1px solid #e1e4e8;
+}
+
+.grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 20px;
+}
+
+.capacity-item {
+
+    background: #ecf9f1;
+
+    border: 1px solid #27ae60;
+
+    color: #27ae60;
+
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+
+        padding: 10px;
+    }
+
+}
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+input,
+select {
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    border: 1px solid #ccc;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: #3498db;
+
+    box-shadow: 0 0 4px rgba(52,152,219,0.3);
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit {
+    background: #28a745;
+}
+
+.btn-delete {
+    background: #dc3545;
+}

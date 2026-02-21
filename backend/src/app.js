@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import productRoutes from './routes/productRoutes.js'
 import rawMaterialsRoutes from './routes/rawMaterialsRoutes.js'
 import productionRoutes from './routes/productionRoutes.js'
+import cors from 'cors'
 
 
 dotenv.config()
@@ -17,7 +18,9 @@ class App{
 
     middlewares(){
         this.server.use(express.json())
+        this.server.use(cors())
     }
+    
 
     routes(){
         this.server.use(productRoutes)

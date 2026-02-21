@@ -51,3 +51,14 @@ export async function getProduction() {
         throw err
     }    
 }
+
+export async function showProduction() {
+    try {
+        const res = await pool.query(`SELECT * FROM production`)
+
+        return res.rows
+    } catch (err){
+        console.error(err)
+        throw err
+    }    
+}
