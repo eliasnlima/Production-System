@@ -33,34 +33,69 @@ export async function getNewProduction() {
 
     const products = {}
 
-    rows.forEach(product => { 
-        if(!products[product.id]){
-            products[product.id] = {
-                id: product.id,
-                name: product.name,
+    rows.forEach(row => {
+
+        if (!products[row.id]) {
+
+            products[row.id] = {
+
+                id: row.id,
+
+                name: row.name,
+
+                price: Number(row.price),
+
                 possible: []
+
             }
         }
 
-        const canProduce = Math.floor(product.stock_quantity / product.quantity)
+        const canProduce =
+            Math.floor(row.stock_quantity / row.quantity)
 
-        products[product.id].possible.push(canProduce)
-    });
+        products[row.id].possible.push(canProduce)
+
+    })
+
 
     const result = []
 
+    let totalProductionValue = 0
+
     for (const id in products) {
 
+        const product = products[id]
+
         const min =
-            Math.min(...products[id].possible)
+            Math.min(...product.possible)
+
+        const totalValue =
+            min * product.price
+
+
+        totalProductionValue += totalValue
+
 
         result.push({
-            id,
-            product_name: products[id].name,
-            can_produce: min
+
+            id: Number(id),
+
+            product_name: product.name,
+
+            unit_price: product.price,
+
+            can_produce: min,
+
+            total_value: totalValue
+
         })
     }
 
-    return result
-    
+    return {
+
+        produce: result,
+
+        total_production_value: totalProductionValue
+
+    }
 }
