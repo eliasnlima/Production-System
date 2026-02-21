@@ -35,6 +35,7 @@ export default function Home() {
     const [editingProduct, setEditingProduct] = useState(null)
     const [editingMaterial, setEditingMaterial] = useState(null)
     const [editingProduction, setEditingProduction] = useState(null)
+    const [totalProductionValue, setTotalProductionValue] = useState(0)
 
     function handleEditProduct(product) {
 
@@ -128,7 +129,10 @@ export default function Home() {
         setProducts(p.products)
         setMaterials(m.materials)
         setProductions(prod.productions)
-        setCapacity(c.produce)
+        setCapacity(c.produce.produce)
+
+        setTotalProductionValue(c.produce.total_production_value)
+
     }
 
     useEffect(() => {
@@ -161,7 +165,7 @@ export default function Home() {
         </div>
 
         <div className="card">
-            <ProductionCapacity capacity={capacity} />
+            <ProductionCapacity capacity={capacity} totalProductionValue={totalProductionValue} />
         </div>
 
     </div>

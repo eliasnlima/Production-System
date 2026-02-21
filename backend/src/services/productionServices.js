@@ -58,7 +58,7 @@ export async function getNewProduction() {
     })
 
 
-    const result = []
+    let result = []
 
     let totalProductionValue = 0
 
@@ -90,6 +90,10 @@ export async function getNewProduction() {
 
         })
     }
+
+    result = result.filter(product => product.can_produce > 0)
+
+    result.sort((a, b) => b.unit_price - a.unit_price)
 
     return {
 

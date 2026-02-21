@@ -108,17 +108,6 @@ button:hover {
     gap: 20px;
 }
 
-.capacity-item {
-
-    background: #ecf9f1;
-
-    border: 1px solid #27ae60;
-
-    color: #27ae60;
-
-    font-weight: bold;
-}
-
 @media (max-width: 768px) {
 
     .container {
@@ -178,4 +167,70 @@ select:focus {
 
 .btn-delete {
     background: #dc3545;
+}
+
+
+.capacity-item {
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+    align-items: center;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #f0fdf4;
+
+    border: 1px solid #27ae60;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.capacity-item span:first-child {
+
+    font-weight: bold;
+
+    color: #2c3e50;
+
+    font-size: 15px;
+}
+
+.capacity-item span {
+
+    color: #34495e;
+}
+
+.capacity-total {
+
+    font-weight: bold;
+
+    color: #27ae60;
+
+    text-align: right;
+}
+
+.capacity-summary {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
