@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { createProduction } from "../../services/api"
 
-export default function ProductionForm({ products, materials, reload, editingProduction, onUpdate}) {
+export default function ProductionForm({ products, materials, reload, editingProduction, onUpdate }) {
 
     const [productId, setProductId] = useState("")
     const [materialId, setMaterialId] = useState("")
@@ -23,6 +23,21 @@ export default function ProductionForm({ products, materials, reload, editingPro
 
         e.preventDefault()
 
+        if (!productId) {
+            alert("Please select a product!")
+            return
+        }
+
+        if (!materialId) {
+            alert("Please select a raw material!")
+            return
+        }
+
+        if (!quantity || isNaN(quantity) || Number(quantity) <= 0) {
+            alert("Quantity must be a valid number greater than 0!")
+            return
+        }
+
         const data = {
 
             product_id: Number(productId),
@@ -31,23 +46,24 @@ export default function ProductionForm({ products, materials, reload, editingPro
 
         }
 
-        if (editingProduction) {
+        try {
+            if (editingProduction) {
+                await onUpdate(editingProduction.id, data)
+            }
 
-            await onUpdate(editingProduction.id, data)
+            else {
+                await createProduction(data)
+                reload()
+            }
 
+            setProductId("")
+            setMaterialId("")
+            setQuantity("")
+        } catch (err) {
+            alert(err.message || "Something went wrong.")
         }
 
-        else {
 
-            await createProduction(data)
-
-            reload()
-        }
-
-        setProductId("")
-        setMaterialId("")
-        setQuantity("")
-        
     }
 
     return (

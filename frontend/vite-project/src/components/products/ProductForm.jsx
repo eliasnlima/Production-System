@@ -21,29 +21,37 @@ export default function ProductForm({ reload, editingProduct, onUpdate }) {
 
         e.preventDefault()
 
+        if (!name.trim()) {
+            alert("Name is required!")
+            return
+        }
+
+        if (!price || isNaN(price) || Number(price) <= 0) {
+            alert("Price must be a valid number greater than 0!")
+            return
+        }
+
         const data = {
             name,
             price: Number(price)
         }
 
+        try {
+            if (editingProduct) {
+                await onUpdate(editingProduct.id, data)
+            }
 
-        if (editingProduct) {
+            else {
+                await createProduct(data)
+                reload()
+            }
 
-            await onUpdate(editingProduct.id, data)
-
+            setName("")
+            setPrice("")
+        } catch (err) {
+            alert(err.message || "Something went wrong.")
         }
 
-        else {
-
-            await createProduct(data)
-
-            reload()
-        }
-
-        setName("")
-        setPrice("")
-
-       
     }
 
     return (
@@ -51,7 +59,7 @@ export default function ProductForm({ reload, editingProduct, onUpdate }) {
         <form onSubmit={handleSubmit}>
 
             <h2>{editingProduct ? "Edit Product" : "Create Product"}</h2>
-            
+
 
             <input
                 placeholder="Name"

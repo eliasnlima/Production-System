@@ -54,7 +54,7 @@ export default function Home() {
 
     async function handleDeleteProduct(id) {
 
-    const confirmDelete = confirm("Deseja excluir este produto?")
+    const confirmDelete = confirm("Delete product?")
 
     if (!confirmDelete) return
 

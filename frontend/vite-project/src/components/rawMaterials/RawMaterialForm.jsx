@@ -21,28 +21,39 @@ export default function RawMaterialForm({ reload, editingMaterial, onUpdate }) {
 
         e.preventDefault()
 
+        if (!name.trim()) {
+            alert("Name is required!")
+            return
+        }
+
+        if (stock === "" || isNaN(stock) || Number(stock) < 0) {
+            alert("Stock must be a valid number greater or equal to 0!")
+            return
+        }
+
         const data = {
             name,
             stock_quantity: Number(stock)
         }
 
-        if (editingMaterial) {
+        try {
+            if (editingMaterial) {
+                await onUpdate(editingMaterial.id, data)
+            }
 
-            await onUpdate(editingMaterial.id, data)
+            else {
+                await createRawMaterial(data)
+                reload()
+            }
 
+            setName("")
+            setStock("")
+        } catch (err) {
+            alert(err.message || "Something went wrong.")
         }
 
-        else {
 
-            await createRawMaterial(data)
 
-            reload()
-        }
-
-        setName("")
-        setStock("")
-
-       
     }
 
     return (
