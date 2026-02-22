@@ -6,9 +6,17 @@ class productController{
         try{
             const { name, price } = req.body
 
-            if (!name || !price){
-                return res.status(400).json({ error: "Name and Price need to be filled in!"})
-            }
+                if (!name || price === undefined) {
+                    return res.status(400).json({ 
+                        error: "Name and price are required." 
+                    })
+                }
+
+                if (typeof price !== "number" || price <= 0) {
+                    return res.status(400).json({
+                        error: "Price must be a valid number greater than 0."
+                    })
+                }
 
             const product = {
                 name,
@@ -45,8 +53,19 @@ class productController{
     async updateProduct(req, res){
         try {
             const {name, price} = req.body
-
             const {id} = req.params
+
+                if (!id || isNaN(id)) {
+                    return res.status(400).json({ 
+                        error: "Invalid product ID." 
+                    })
+                }
+
+                if (!name || price === undefined) {
+                    return res.status(400).json({ 
+                        error: "Name and price are required for update." 
+                    })
+                }
 
             const product = {
                 name,
@@ -54,6 +73,12 @@ class productController{
             }
 
             const update = await updateProduct(id, product)
+
+                if (!update) {
+                    return res.status(404).json({ 
+                        error: "Product not found." 
+                    })
+                }
 
             return res.status(200).json({ message: "Product updated successfully!", update})
         } catch (err){
@@ -69,7 +94,19 @@ class productController{
         try {
             const {id} = req.params
 
+                if (!id || isNaN(id)) {
+                return res.status(400).json({ 
+                    error: "Invalid product ID." 
+                })
+                }
+
             const newDelete = await deleteProduct(id)
+
+                if (!newDelete) {
+                return res.status(404).json({ 
+                    error: "Product not found." 
+                })
+                }
                 
                 return res.status(200).json({ message: "Product successfully deleted", newDelete})
         } catch (err){
