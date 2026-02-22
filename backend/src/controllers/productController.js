@@ -1,22 +1,22 @@
 import { deleteProduct, regProduct, showAllProducts, updateProduct } from "../repositories/productRepository.js"
 
-class productController{
-    
-    async regProduct(req, res){
-        try{
+class productController {
+
+    async regProduct(req, res) {
+        try {
             const { name, price } = req.body
 
-                if (!name || price === undefined) {
-                    return res.status(400).json({ 
-                        error: "Name and price are required." 
-                    })
-                }
+            if (!name || price === undefined) {
+                return res.status(400).json({
+                    error: "Name and price are required."
+                })
+            }
 
-                if (typeof price !== "number" || price <= 0) {
-                    return res.status(400).json({
-                        error: "Price must be a valid number greater than 0."
-                    })
-                }
+            if (typeof price !== "number" || price <= 0) {
+                return res.status(400).json({
+                    error: "Price must be a valid number greater than 0."
+                })
+            }
 
             const product = {
                 name,
@@ -25,47 +25,47 @@ class productController{
 
             const newProduct = await regProduct(product)
 
-            return res.status(201).json({newProduct})
+            return res.status(201).json({ newProduct })
 
-        } catch (error){
+        } catch (error) {
 
             console.error(error)
 
-            return res.status(500).json({error: "Error registering product!"})
+            return res.status(500).json({ error: "Error registering product!" })
         }
     }
 
-    async showAllProducts(req, res){
-        try{    
-            
+    async showAllProducts(req, res) {
+        try {
+
             const products = await showAllProducts()
 
-            return res.status(200).json({products})
+            return res.status(200).json({ products })
 
-        } catch (error){
+        } catch (error) {
 
             console.error(error)
 
-            return res.status(500).json({error: "Error fetching products:", err})
+            return res.status(500).json({ error: "Error fetching products:", err })
         }
     }
 
-    async updateProduct(req, res){
+    async updateProduct(req, res) {
         try {
-            const {name, price} = req.body
-            const {id} = req.params
+            const { name, price } = req.body
+            const { id } = req.params
 
-                if (!id || isNaN(id)) {
-                    return res.status(400).json({ 
-                        error: "Invalid product ID." 
-                    })
-                }
+            if (!id || isNaN(id)) {
+                return res.status(400).json({
+                    error: "Invalid product ID."
+                })
+            }
 
-                if (!name || price === undefined) {
-                    return res.status(400).json({ 
-                        error: "Name and price are required for update." 
-                    })
-                }
+            if (!name || price === undefined) {
+                return res.status(400).json({
+                    error: "Name and price are required for update."
+                })
+            }
 
             const product = {
                 name,
@@ -74,44 +74,44 @@ class productController{
 
             const update = await updateProduct(id, product)
 
-                if (!update) {
-                    return res.status(404).json({ 
-                        error: "Product not found." 
-                    })
-                }
+            if (!update) {
+                return res.status(404).json({
+                    error: "Product not found."
+                })
+            }
 
-            return res.status(200).json({ message: "Product updated successfully!", update})
-        } catch (err){
+            return res.status(200).json({ message: "Product updated successfully!", update })
+        } catch (err) {
             console.error(err)
 
-            return res.status(500).json({ error: "Error updating product:", err})
+            return res.status(500).json({ error: "Error updating product:", err })
         }
-        
-        
+
+
     }
 
-    async deleteProduct(req, res){
+    async deleteProduct(req, res) {
         try {
-            const {id} = req.params
+            const { id } = req.params
 
-                if (!id || isNaN(id)) {
-                return res.status(400).json({ 
-                    error: "Invalid product ID." 
+            if (!id || isNaN(id)) {
+                return res.status(400).json({
+                    error: "Invalid product ID."
                 })
-                }
+            }
 
             const newDelete = await deleteProduct(id)
 
-                if (!newDelete) {
-                return res.status(404).json({ 
-                    error: "Product not found." 
+            if (!newDelete) {
+                return res.status(404).json({
+                    error: "Product not found."
                 })
-                }
-                
-                return res.status(200).json({ message: "Product successfully deleted", newDelete})
-        } catch (err){
+            }
+
+            return res.status(200).json({ message: "Product successfully deleted", newDelete })
+        } catch (err) {
             console.error(err)
-            return res.status(500).json({error: "Error deleting product: ", err})
+            return res.status(500).json({ error: "Error deleting product: ", err })
         }
     }
 }
