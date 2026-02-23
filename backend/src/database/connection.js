@@ -4,8 +4,15 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const pool = new Pool({
-    connectionString: process.env.CONNECTION_STRING
+    connectionString: process.env.CONNECTION_STRING,
+    ssl: {
+    rejectUnauthorized: false
+  }
 })
+
+pool.on('connect', (client) => {
+  client.query('SET search_path TO public');
+});
 
 pool.connect()
     .then(() => {

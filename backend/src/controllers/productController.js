@@ -46,7 +46,7 @@ class productController {
 
             console.error(error)
 
-            return res.status(500).json({ error: "Error fetching products:", err })
+            return res.status(500).json({ error: "Error fetching products:", error })
         }
     }
 
