@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import productRoutes from './routes/productRoutes.js'
+import productRoutes from './routes/ProductRoutes.js'
 import rawMaterialsRoutes from './routes/rawMaterialsRoutes.js'
 import productionRoutes from './routes/productionRoutes.js'
 import cors from 'cors'
