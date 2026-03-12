@@ -2,8 +2,6 @@
 
 Este é um sistema completo de gestão de produção projetado para controlar o fluxo entre matérias-primas e produtos finais, permitindo visualizar a capacidade produtiva em tempo real com base no estoque disponível.
 
-Link: https://production-system-jtjqk19h9-elias-nery-limas-projects.vercel.app
-
 ## 📋 Funcionalidades Principais
 
 ### 📦 Gestão de Produtos
